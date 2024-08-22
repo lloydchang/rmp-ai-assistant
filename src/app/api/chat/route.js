@@ -11,4 +11,9 @@ Use them to answer the question if needed.
 export async function POST(req) {
     const data = await req.json()
     // We'll add more code here in the following steps
+    const pc = new Pinecone({
+    apiKey: process.env.PINECONE_API_KEY,
+    })
+    const index = pc.index('rag').namespace('ns1')
+    const openai = new OpenAI()
 }
