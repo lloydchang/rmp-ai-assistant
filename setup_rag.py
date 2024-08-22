@@ -1,3 +1,5 @@
+# setup_rag.py
+
 from dotenv import load_dotenv
 load_dotenv()
 from pinecone import Pinecone, ServerlessSpec
@@ -5,8 +7,14 @@ from openai import OpenAI
 import os
 import json
 
-# Initialize Pinecone
-pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+# Load environment variables from the .env.local file
+load_dotenv(".env.local")
+
+# Retrieve the API key from the environment variables
+api_key = os.getenv("PINECONE_API_KEY")
+
+# Initialize Pinecone with the API key
+pc = Pinecone(api_key)
 
 # Create a Pinecone index
 pc.create_index(
