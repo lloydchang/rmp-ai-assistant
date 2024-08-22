@@ -41,3 +41,7 @@ results.matches.forEach((match) => {
   Stars: ${match.metadata.stars}
   \n\n`
 })
+
+const lastMessage = data[data.length - 1]
+const lastMessageContent = lastMessage.content + resultString
+const lastDataWithoutLastMessage = data.slice(0, data.length - 1)
