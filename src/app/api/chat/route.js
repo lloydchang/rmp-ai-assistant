@@ -30,3 +30,14 @@ const results = await index.query({
     includeMetadata: true,
     vector: embedding.data[0].embedding,
 })
+
+let resultString = ''
+results.matches.forEach((match) => {
+  resultString += `
+  Returned Results:
+  Professor: ${match.id}
+  Review: ${match.metadata.stars}
+  Subject: ${match.metadata.subject}
+  Stars: ${match.metadata.stars}
+  \n\n`
+})
