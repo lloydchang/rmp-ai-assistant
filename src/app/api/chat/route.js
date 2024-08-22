@@ -17,3 +17,10 @@ export async function POST(req) {
     const index = pc.index('rag').namespace('ns1')
     const openai = new OpenAI()
 }
+
+const text = data[data.length - 1].content
+const embedding = await openai.embeddings.create({
+  model: 'text-embedding-3-small',
+  input: text,
+  encoding_format: 'float',
+})
