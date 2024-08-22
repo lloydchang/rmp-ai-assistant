@@ -1,11 +1,10 @@
 {
-    "reviews": [
-      {
-        "professor": "Prof1",
-        "review": "Great professor...",
-        "subject": "Math",
-        "stars": 5
-      },
-      // ... more reviews ...
-    ]
+  "reviews": [
+    {
+      "professor": "Prof1",
+      "review": "Great professor...",
+      "subject": "Math",
+      "stars": 5
+    }
+  ]
 }
