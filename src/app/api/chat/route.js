@@ -24,3 +24,9 @@ const embedding = await openai.embeddings.create({
   input: text,
   encoding_format: 'float',
 })
+
+const results = await index.query({
+    topK: 5,
+    includeMetadata: true,
+    vector: embedding.data[0].embedding,
+})
