@@ -1,15 +1,18 @@
 // src/app/api/chat/route.js
 
 import { NextResponse } from 'next/server';
+import fetch from 'node-fetch';
 import { Pinecone } from '@pinecone-database/pinecone';
 import OpenAI from 'openai';
 
+// Define the system prompt for the AI
 const systemPrompt = `
 You are a rate my professor agent to help students find classes, that takes in user questions and answers them.
 For every user question, the top 3 professors that match the user question are returned.
 Use them to answer the question if needed.
 `;
 
+// Define the POST handler for the /api/chat route
 export async function POST(req) {
     try {
         // Parse the request data
@@ -20,7 +23,9 @@ export async function POST(req) {
             apiKey: process.env.PINECONE_API_KEY,
         });
         const index = pc.index('rag').namespace('ns1');
-        const openai = new OpenAI();
+        const openai = new OpenAI({
+            apiKey: process.env.OPENAI_API_KEY,
+        });
 
         // Extract text from the last message in the data
         const text = data[data.length - 1].content;
@@ -46,7 +51,7 @@ export async function POST(req) {
             resultString += `
             Returned Results:
             Professor: ${match.id}
-            Review: ${match.metadata.stars}
+            Review: ${match.metadata.review}
             Subject: ${match.metadata.subject}
             Stars: ${match.metadata.stars}
             \n\n`;
@@ -91,6 +96,7 @@ export async function POST(req) {
         // Return the stream as the response
         return new NextResponse(stream);
     } catch (error) {
+        // Log the error and return a 500 response
         console.error('Error processing request:', error);
         return new NextResponse('Internal Server Error', { status: 500 });
     }
