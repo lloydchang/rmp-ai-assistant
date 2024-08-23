@@ -1,6 +1,14 @@
 'use client'
 import { Box, Button, Stack, TextField } from '@mui/material'
 import { useState } from 'react'
+import posthog from 'posthog-js'
+
+posthog.init('phc_cdneZeooRSRLcc0beysplQjnjwxDL8Yv1gfm2HyObwY',
+    {
+        api_host: 'https://us.i.posthog.com',
+        person_profiles: 'always' // or 'always' to create profiles for anonymous users as well
+    }
+)
 
 export default function Home() {
   // State for messages and input
