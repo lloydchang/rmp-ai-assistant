@@ -31,10 +31,9 @@ export default function Home() {
 
     const reader = response.body?.getReader()
     const decoder = new TextDecoder()
-    let result = ''
 
     if (reader) {
-      const processText = async ({ done, value }: ReadableStreamDefaultReadResult<Uint8Array>): Promise<void> => {
+      const processText = async ({ done, value }: ReadableStreamReadResult<Uint8Array>): Promise<void> => {
         if (done) {
           return
         }
